@@ -1,0 +1,19 @@
+{
+  "name": "antibullybot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start:dev:pool": "NODE_ENV=dev nodemon bot.js",
+    "start:dev:hook": "NODE_ENV=dev nodemon bot_webhook.js",
+    "start:prod": "NODE_ENV=prod nodemon server.js"
+  },
+  "author": "Yaroslav Davydchuk",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "grammy": "^1.22.4",
+    "mysql2": "^3.9.7"
+  }
+}
