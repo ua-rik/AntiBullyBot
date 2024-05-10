@@ -1,5 +1,6 @@
 const express = require("express");
 const {Bot, webhookCallback} = require("grammy");
+
 const dotenv = require('dotenv');
 
 console.log(process.env.NODE_ENV)
@@ -17,7 +18,12 @@ app.use(express.json());
 app.use(webhookCallback(bot, "express"));
 
 //bot middlewares
+
 bot.use(stateSavingMiddleware());
+
+
+
+bot.command("test", (ctx) => mainController.controller('testMessage')(ctx));
 
 bot.command("start", (ctx) => mainController.controller('startMessage')(ctx));
 bot.on("message", (ctx) => mainController.controller('defaultMessage')(ctx));
