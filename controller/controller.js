@@ -32,10 +32,14 @@ const msgList = {
 
 exports.controller = (callback) =>  (ctx) => {
     console.log('💬 ', callback)
-    if (msgList[callback]) {
-        msgList[callback](ctx);
+
+    const action = callback.split('/')[0];
+
+    if (msgList[action]) {
+        msgList[action](ctx);
     } else {
         //ctx.reply("Не відома опція.");
-        console.log('🦠 error')
+        console.log('🦠 error');
+        ctx.reply("🦠 Помилка");
     }
 }

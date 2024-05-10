@@ -1,9 +1,11 @@
 //const {InlineKeyboard} = require("grammy");
+const { msg } = require('./allMessages')
+const { getLastMessage } = require('../utils/utils')
 
 exports.defaultMessage = async (ctx) => {
      // todo: видалити попереднє
 
-     await ctx.reply("Не пиши мені! Використовуй кнопки.")
+     await ctx.reply(msg.white13)
      console.log(`Юзер ${ctx.from.id} пише: ${ctx.message}`)
 
      // todo: продублювати попереднє
@@ -11,137 +13,134 @@ exports.defaultMessage = async (ctx) => {
 
 
 exports.startMessage = async (ctx) => {
-     await ctx.reply("Привіт, дякую за звернення! Це - антибулінговий бот. Нумо знайомитися!");
+     await getLastMessage(ctx)
 
-     await ctx.reply("Ти хлопець чи дівчина?", {
+     await ctx.reply(msg['white1'])
+     await ctx.reply(msg['white2'], {
           reply_markup: {
                inline_keyboard: [
-                    [{ text: "Хлопець}", callback_data: "gender_male" }],
-                    [{ text: "Дівчина", callback_data: "gender_female" }]
+                    [{ text: "Хлопець", callback_data: "gender_male/white2" }],
+                    [{ text: "Дівчина", callback_data: "gender_female/white2" }]
                ]
           }
      });
 }
 
 exports.gender = async (ctx, sex) => {
-     // await ctx.editMessageText("Твій вибір: " + (sex === "male" ? "Чоловік" : "Жінка"));
+     await getLastMessage(ctx)
      // ToDo: запис в БД статі юзера
-     await ctx.deleteMessage();
-
-     await ctx.reply("Тепер розберімося з твоїм запитом");
+     // "Тепер розберімося з твоїм запитом"
+     await ctx.reply(msg.white3);
 
      // пауза
      await ctx.replyWithChatAction('typing');
      await new Promise(resolve => setTimeout(resolve, 2000));
-
-     await ctx.reply("Тебе щось хвилює", {
+     // "Тебе щось хвилює"
+     await ctx.reply(msg.white4, {
           reply_markup: {
                inline_keyboard: [
-                    [{ text: "Так", callback_data: "whatsUp" }],
-                    [{ text: "Ні", callback_data: "wannaTalk" }],
-                    [{ text: "Завершити спілкування", callback_data: "thanksTakeCare" }]
+                    [{ text: "Так", callback_data: "whatsUp/white4" }],
+                    [{ text: "Ні", callback_data: "wannaTalk/white4" }],
+                    [{ text: "Завершити спілкування", callback_data: "thanksTakeCare/white4" }]
                ]
           }
      });
 }
 
 exports.wannaTalk = async (ctx) => {
-     await ctx.deleteMessage()
-     await ctx.reply("Круто, приємно було познайомитися! Просто хочеш поговорити?", {
+     await getLastMessage(ctx)
+     // "Круто, приємно було познайомитися! Просто хочеш поговорити?"
+     await ctx.reply(msg.white5, {
           reply_markup: {
                inline_keyboard: [
-                    [{ text: "Так", callback_data: "sorryBye" }],
-                    [{ text: "Ні", callback_data: "byeThen" }]
+                    [{ text: "Так", callback_data: "sorryBye/white5" }],
+                    [{ text: "Ні", callback_data: "byeThen/white5" }]
                ]
           }
      });
 }
 
 exports.byeThen = async (ctx) => {
-     await ctx.deleteMessage()
-     await ctx.reply("Тоді бувай!", {
+     await getLastMessage(ctx)
+     //тоді бувай
+     await ctx.reply(msg.white6, {
           reply_markup: {
                inline_keyboard: [
-                    [{ text: "Тиць!", callback_data: "restartBot" }]
+                    [{ text: "Тиць!", callback_data: "restartBot/white6" }]
                ]
           }
      });
 }
 
 exports.sorryBye = async (ctx) => {
-     await ctx.deleteMessage()
-
-     await ctx.reply("Вибач, я трохи на інше запрограмований. " +
-         "Але все одно, приємно було спілкуватись! " +
-         "Вважай це знаком того, що ти дуже великий молодець!", {
+     await getLastMessage(ctx)
+     // "Вибач, я трохи на інше запрограмований"
+     await ctx.reply(msg.white7, {
           reply_markup: {
                inline_keyboard: [
-                    [{ text: "Тиць!", callback_data: "restartBot" }]
+                    [{ text: "Тиць!", callback_data: "restartBot/white7" }]
                ]
           }
      });
 }
 
 exports.whatsUp = async (ctx) => {
-     await ctx.deleteMessage()
-     await ctx.reply("Розкажи, будь ласка, що саме тебе турбує. Тебе ображають в школі?", {
+     await getLastMessage(ctx)
+     // "Розкажи, будь ласка, що саме тебе турбує. Тебе ображають в школі?"
+     await ctx.reply(msg.white8, {
           reply_markup: {
                inline_keyboard: [
-                    [{ text: "Так", callback_data: "bullyingAbout" }],
-                    [{ text: "Ні", callback_data: "red1" }]
+                    [{ text: "Так", callback_data: "bullyingAbout/white8" }],
+                    [{ text: "Ні", callback_data: "red1/white8" }]
                ]
           }
      });
 }
 
 exports.thanksTakeCare = async (ctx) => {
-     await ctx.deleteMessage()
-     await ctx.reply("Дякую за розмову :) Потурбуйся про себе!?", {
+     await getLastMessage(ctx)
+     await ctx.reply(msg.white11, {
           reply_markup: {
                inline_keyboard: [
-                    [{ text: "Тиць!", callback_data: "restartBot" }]
+                    [{ text: "Тиць!", callback_data: "restartBot/white11" }]
                ]
           }
      });
 }
 
 exports.restartBot = async (ctx) => {
-     await ctx.deleteMessage()
-     await ctx.reply("Запустити діалог спочатку?", {
+     await getLastMessage(ctx)
+     await ctx.reply(msg.white12, {
           reply_markup: {
                inline_keyboard: [
-                    [{ text: "Так", callback_data: "startMessage" }]
+                    [{ text: "Так", callback_data: "startMessage/white12" }]
                ]
           }
      });
 }
 
 exports.bullyingAbout = async (ctx) => {
-     await ctx.deleteMessage()
-     await ctx.reply("Почитай уважно, чи схоже на твій досвід:\n" +
-         "Булінг — це коли людині навмисно і неодноразово завдають болю, і їй з певних причин важко захистити себе.\n" +
-         "Біль може бути фізичний, психологічний, " +
-         "може бути ізоляцією або пошкодженням репутації, втручанням в дружні стосунки.\n" +
-         "Тебе непокоїть ситуація схожа на це?", {
+     await getLastMessage(ctx)
+     await ctx.reply(msg.white9, {
           reply_markup: {
                inline_keyboard: [
-                    [{ text: "Так", callback_data: "yourRole" }],
-                    [{ text: "Ні", callback_data: "red1" }]
+                    [{ text: "Так", callback_data: "yourRole/white9" }],
+                    [{ text: "Ні", callback_data: "red1/white9" }]
                ]
           }
      });
 }
 
 exports.yourRole = async (ctx) => {
-     await ctx.deleteMessage()
-     await ctx.reply("Мені дуже шкода, що так сталося.\n" +
-         "Скажи, яка роль найкраще описує тебе в цих обставинах?", {
+     await getLastMessage(ctx)
+     // "Мені дуже шкода, що так сталося"
+     await ctx.reply(msg.white10, {
           reply_markup: {
                inline_keyboard: [
-                    [{ text: "Мішень булінгу", callback_data: "green1" }],
-                    [{ text: "Свідок булінгу", callback_data: "yellow1" }],
-                    [{ text: "Нападник", callback_data: "pink1" }],
-                    [{ text: "Дорослий", callback_data: "blue1" }],
+                    [{ text: "Мішень булінгу", callback_data: "green1/white10" }],
+                    [{ text: "Свідок булінгу", callback_data: "yellow1/white10" }],
+                    [{ text: "Нападник", callback_data: "pink1/white10" }],
+                    [{ text: "Дорослий", callback_data: "blue1/white10" }],
 
                ]
           }
@@ -151,17 +150,17 @@ exports.yourRole = async (ctx) => {
 
 
 /// test
-exports.testMessage = async (ctx) => {
-     //await ctx.deleteMessage()
-
-     const keyboard = new InlineKeyboard()
-         .url("Подзвонити?", "tg://resolve?phone=116111");
-     await ctx.reply(
-         `Зателефонуй за номером [911](tel:911) та [\\+380972878635](tel:\\+380972878635)`,
-         {
-              parse_mode: "MarkdownV2",
-              reply_markup: keyboard,
-              disable_web_page_preview: true
-         }
-        );
-}
+// exports.testMessage = async (ctx) => {
+//      //await ctx.deleteMessage()
+//
+//      const keyboard = new InlineKeyboard()
+//          .url("Подзвонити?", "tg://resolve?phone=116111");
+//      await ctx.reply(
+//          `Зателефонуй за номером [911](tel:911) та [\\+380972878635](tel:\\+380972878635)`,
+//          {
+//               parse_mode: "MarkdownV2",
+//               reply_markup: keyboard,
+//               disable_web_page_preview: true
+//          }
+//         );
+// }
