@@ -1,3 +1,4 @@
+const {InlineKeyboard} = require("grammy");
 exports.defaultMessage = async (ctx) => {
      // todo: видалити попереднє
 
@@ -89,7 +90,7 @@ exports.whatsUp = async (ctx) => {
           reply_markup: {
                inline_keyboard: [
                     [{ text: "Так", callback_data: "bullyingAbout" }],
-                    [{ text: "Ні", callback_data: "!!!" }]
+                    [{ text: "Ні", callback_data: "red1" }]
                ]
           }
      });
@@ -126,9 +127,43 @@ exports.bullyingAbout = async (ctx) => {
          "Тебе непокоїть ситуація схожа на це?", {
           reply_markup: {
                inline_keyboard: [
-                    [{ text: "Так", callback_data: "!!!" }],
-                    [{ text: "Ні", callback_data: "!!!" }]
+                    [{ text: "Так", callback_data: "yourRole" }],
+                    [{ text: "Ні", callback_data: "red1" }]
                ]
           }
      });
+}
+
+exports.yourRole = async (ctx) => {
+     await ctx.deleteMessage()
+     await ctx.reply("Мені дуже шкода, що так сталося.\n" +
+         "Скажи, яка роль найкраще описує тебе в цих обставинах?", {
+          reply_markup: {
+               inline_keyboard: [
+                    [{ text: "Мішень булінгу", callback_data: "green1" }],
+                    [{ text: "Свідок булінгу", callback_data: "yellow1" }],
+                    [{ text: "Нападник", callback_data: "pink1" }],
+                    [{ text: "Дорослий", callback_data: "blue1" }],
+
+               ]
+          }
+     });
+}
+
+
+
+/// test
+exports.testMessage = async (ctx) => {
+     //await ctx.deleteMessage()
+
+     const keyboard = new InlineKeyboard()
+         .url("Подзвонити?", "tg://resolve?phone=116111");
+     await ctx.reply(
+         `Зателефонуй за номером [911](tel:911) та [\\+380972878635](tel:\\+380972878635)`,
+         {
+              parse_mode: "MarkdownV2",
+              reply_markup: keyboard,
+              disable_web_page_preview: true
+         }
+        );
 }
