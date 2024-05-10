@@ -10,15 +10,13 @@ exports.defaultMessage = async (ctx) => {
 
 
 exports.startMessage = async (ctx) => {
-     // Перше повідомлення з привітанням
      await ctx.reply("Привіт, дякую за звернення! Це - антибулінговий бот. Нумо знайомитися!");
 
-     // Друге повідомлення з вибором статі
      await ctx.reply("Ти хлопець чи дівчина?", {
           reply_markup: {
                inline_keyboard: [
-                    [{ text: "Чоловік", callback_data: "gender_male" }],
-                    [{ text: "Жінка", callback_data: "gender_female" }]
+                    [{ text: "Хлопець}", callback_data: "gender_male" }],
+                    [{ text: "Дівчина", callback_data: "gender_female" }]
                ]
           }
      });
@@ -30,10 +28,9 @@ exports.gender = async (ctx, sex) => {
      await ctx.deleteMessage();
 
      await ctx.reply("Тепер розберімося з твоїм запитом");
-     // Відправка дії "набирання тексту"
-     await ctx.replyWithChatAction('typing');
 
-     // Додавання затримки (2 секунди)
+     // пауза
+     await ctx.replyWithChatAction('typing');
      await new Promise(resolve => setTimeout(resolve, 2000));
 
      await ctx.reply("Тебе щось хвилює", {

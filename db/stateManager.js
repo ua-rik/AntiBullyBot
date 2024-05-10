@@ -14,4 +14,4 @@ async function saveUserState(userId, userName, currentState) {
 }
 
 
-module.exports = { saveUserState };
+module.exports = { saveUserState, saveUserGender, getUserGenrer };
