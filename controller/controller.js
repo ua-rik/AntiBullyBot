@@ -1,6 +1,7 @@
 const startGroup = require('../conversations/startGroup');
 
 const msgList = {
+    //white-start-group
     'startMessage': startGroup.startMessage,
     'defaultMessage': startGroup.defaultMessage,
     'gender_male': (ctx) => startGroup.gender(ctx, 'male'),

@@ -41,3 +41,18 @@ exports.gender = async (ctx, sex) => {
           }
      });
 }
+
+
+exports.restartBot = async (ctx) => {
+     // Перше повідомлення з привітанням
+     await ctx.reply("Привіт, дякую за звернення! Це - антибулінговий бот. Нумо знайомитися!");
+
+     // Друге повідомлення з вибором статі
+     await ctx.reply("Запустити діалог спочатку?", {
+          reply_markup: {
+               inline_keyboard: [
+                    [{ text: "Так", callback_data: "startMessage" }]
+               ]
+          }
+     });
+}

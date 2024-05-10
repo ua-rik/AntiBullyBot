@@ -1,16 +1,23 @@
 const express = require("express");
 const {Bot, webhookCallback} = require("grammy");
 const dotenv = require('dotenv');
-const mainController = require('./controller/controller')
-//bot init
+
 console.log(process.env.NODE_ENV)
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+
+const mainController = require('./controller/controller')
+const { stateSavingMiddleware } = require('./controller/botMiddleware')
+
+//bot init
 const bot = new Bot(process.env.BOT_TOKEN);
+
 //express init
 const app = express();
 app.use(express.json());
-
 app.use(webhookCallback(bot, "express"));
+
+//bot middlewares
+bot.use(stateSavingMiddleware());
 
 bot.command("start", (ctx) => mainController.controller('startMessage')(ctx));
 bot.on("message", (ctx) => mainController.controller('defaultMessage')(ctx));
