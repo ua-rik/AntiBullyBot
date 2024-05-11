@@ -1,91 +1,57 @@
-const pink1Message = "Дякую за твою відвертість.\n" +
-    "Визнати це потребувало великої відваги.\n" +
-    "Ти хочеш припинити цькувати?";
-
-const pink1Message2 = "Люди часто цькують не через те, що вони погані, " +
-    "а тому, що відчайдушно хочуть отримати визнання та прийняття " +
-    "з боку своїх однолітків. Або їм здається, що без мішені булінгу " +
-    "у класі буде краще. "
-
-const pink2Message = "Скажу трохи банальну річ, але здобути прийняття друзів " +
-    "та однолітків можна також в інший спосіб. Наприклад, своєю відвагою, " +
-    "розумом, ерудованістю, гумором. Якщо тебе приймають за те, що ти " +
-    "робиш боляче комусь іншому, то це... \n" +
-    "Така трохи нездорова атмосфера " +
-    "в групі, тобі не здається?"
-
-// const pink3Message =
-
-// const pink4Message =
-
-// const pink5Message =
+const { msg } = require('./allMessages')
+const { getLastMessage } = require('../utils/utils')
 
 
 exports.pink1 = async (ctx) => {
-    await ctx.deleteMessage()
-    await ctx.reply(pink1Message);
+    await getLastMessage(ctx)
+    // "Дякую за твою відвертість..."
+    await ctx.reply(msg.pink1_1);
     // пауза
     await ctx.replyWithChatAction('typing');
     await new Promise(resolve => setTimeout(resolve, 3000));
-    await ctx.reply(pink1Message2, {
+    // "Люди часто цькують не через те..."
+    await ctx.reply(msg.pink1_2, {
         reply_markup: {
             inline_keyboard: [
-                [{text: "Тиць!", callback_data: "pink2"}]
+                [{text: "Тиць!", callback_data: "pink2/pink1_2"}]
             ]
         }
     });
 }
 
 exports.pink2 = async (ctx) => {
-    await ctx.editMessageText(pink1Message2);
-    await ctx.reply(pink2Message, {
+    await getLastMessage(ctx)
+    // "Скажу трохи банальну річ...тобі не здається?"
+    await ctx.reply(msg.pink2, {
         reply_markup: {
             inline_keyboard: [
-                [{text: "Тиць!", callback_data: "pink3"}]
+                [{text: "Здається!", callback_data: "pink3/pink2"}]
             ]
         }
     });
 }
 
 exports.pink3 = async (ctx) => {
-    await ctx.editMessageText("Скажу трохи банальну річ, але здобути прийняття друзів " +
-        "та однолітків можна також в інший спосіб. Наприклад, своєю відвагою, " +
-        "розумом, ерудованістю, гумором. Якщо тебе приймають за те, що ти " +
-        "робиш боляче комусь іншому, то це... \n" +
-        "Така трохи нездорова атмосфера " +
-        "в групі, тобі не здається?");
-
-    await ctx.reply('Булінг - дуже шкідлива штука для ментального здоровʼя. ' +
-        'Наслідки його тривають все життя. Люди, що зазнали булінгу, ' +
-        'схильні до депресій, тривожностей та думок про самогубство ' +
-        'навіть у дорослому віці. Ти певен, що готовий/-ва нести таку ' +   //ToDo: стать
-        'відповідальність все життя?',
+    await getLastMessage(ctx)
+    // 'Булінг - дуже шкідлива штука для ментального здоровʼя.'
+    await ctx.reply(msg.pink3, // ToDo: стать
         {
             reply_markup: {
                 inline_keyboard: [
-                    [{text: "Тиць", callback_data: "pink4"}]
+                    [{text: "Тиць", callback_data: "pink4/pink3"}]
                 ]
             }
         });
 }
 
 exports.pink4 = async (ctx) => {
-    await ctx.editMessageText('Булінг - дуже шкідлива штука для ментального здоровʼя. ' +
-        'Наслідки його тривають все життя. Люди, що зазнали булінгу, ' +
-        'схильні до депресій, тривожностей та думок про самогубство ' +
-        'навіть у дорослому віці. Ти певен, що готовий/-ва нести таку ' +   //ToDo: стать
-        'відповідальність все життя?'
-    )
-
-    await ctx.reply('Тому наш план дій такий: наступного разу не підключайся ' +
-        'до булінгу. Якщо маєш сили, то спробуй спинити булінг інших словами. ' +
-        'Якщо ні - підійди потім до того, кого цькують, і вислови підтримку.\n' +
-        '\n' +
-        'У тебе все вийде, я знаю, що ти хороша людина!',
+    await getLastMessage(ctx)
+    // 'Тому наш план дій такий...'
+    await ctx.reply(msg.pink4,
         {
             reply_markup: {
                 inline_keyboard: [
-                    [{text: "Тиць!", callback_data: "restartBot"}],
+                    [{text: "Тиць!", callback_data: "restartBot/pink4"}],
                 ]
             }
         });

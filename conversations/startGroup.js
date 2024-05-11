@@ -110,6 +110,7 @@ exports.thanksTakeCare = async (ctx) => {
 
 exports.restartBot = async (ctx) => {
      await getLastMessage(ctx)
+     // Запустити діалог спочатку?
      await ctx.reply(msg.white12, {
           reply_markup: {
                inline_keyboard: [
@@ -121,7 +122,9 @@ exports.restartBot = async (ctx) => {
 
 exports.bullyingAbout = async (ctx) => {
      await getLastMessage(ctx)
+     // Почитай уважно, чи схоже на твій досвід
      await ctx.reply(msg.white9, {
+          parse_mode: "HTML",
           reply_markup: {
                inline_keyboard: [
                     [{ text: "Так", callback_data: "yourRole/white9" }],
@@ -137,17 +140,27 @@ exports.yourRole = async (ctx) => {
      await ctx.reply(msg.white10, {
           reply_markup: {
                inline_keyboard: [
-                    [{ text: "Мішень булінгу", callback_data: "green1/white10" }],
-                    [{ text: "Свідок булінгу", callback_data: "yellow1/white10" }],
+                    [{ text: "Мішень булінгу", callback_data: "notReadyYet/white10" }],
+                    [{ text: "Свідок булінгу", callback_data: "notReadyYet/white10" }],
                     [{ text: "Нападник", callback_data: "pink1/white10" }],
-                    [{ text: "Дорослий", callback_data: "blue1/white10" }],
+                    [{ text: "Дорослий", callback_data: "notReadyYet/white10" }],
 
                ]
           }
      });
 }
 
-
+exports.notReadyYet = async (ctx) => {
+     await getLastMessage(ctx)
+     // "діалог не готовий"
+     await ctx.reply(msg.white14, {
+          reply_markup: {
+               inline_keyboard: [
+                    [{ text: "🌀 Перезапустити", callback_data: "startMessage/white14" }],
+               ]
+          }
+     });
+}
 
 /// test
 // exports.testMessage = async (ctx) => {

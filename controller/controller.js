@@ -1,5 +1,9 @@
 const startGroup = require('../conversations/startGroup');
 const redGroup = require('../conversations/redGroup');
+const pinkGroup = require('../conversations/pinkGroup');
+const yellowGroup = require('../conversations/yellowGroup');
+const blueGroup = require('../conversations/blueGroup');
+const greenGroup = require('../conversations/greenGroup');
 
 const msgList = {
     //white-start-group
@@ -23,8 +27,25 @@ const msgList = {
     'red3': redGroup.red3,
     'red4': redGroup.red4,
     //yellow
+    yellow1: yellowGroup.yellow1,
+    yellow2: yellowGroup.yellow2,
+    yellow3: yellowGroup.yellow3,
+    yellow4: yellowGroup.yellow4,
+    yellow5: yellowGroup.yellow5,
+    yellow6: yellowGroup.yellow6,
+    yellow7: yellowGroup.yellow7,
+    yellow8: yellowGroup.yellow8,
+    yellow9: yellowGroup.yellow9,
+    yellow10: yellowGroup.yellow10,
+    yellow11: yellowGroup.yellow11,
+    yellow12: yellowGroup.yellow12,
+
 
     //pink
+    'pink1': pinkGroup.pink1,
+    'pink2': pinkGroup.pink2,
+    'pink3': pinkGroup.pink3,
+    'pink4': pinkGroup.pink4,
     //green
 };
 

@@ -1,31 +1,33 @@
-const { allMessages } = require('./allMessages')
+const { msg } = require('./allMessages')
+const { getLastMessage } = require('../utils/utils')
 
 exports.red1 = async (ctx) => {
-    await ctx.deleteMessage()
-    await ctx.reply(allMessages.red1, {
+    await getLastMessage(ctx)
+    // 'Тебе турбує щось інше?
+    await ctx.reply(msg.red1, {
         reply_markup: {
             inline_keyboard: [
-                [{text: "Тиць!", callback_data: "red2"}]
+                [{text: "Тиць!", callback_data: "red2/red1"}]
             ]
         }
     });
 }
 
 exports.red2 = async (ctx) => {
-    await ctx.editMessageText(allMessages.red1);
-    await ctx.reply(allMessages.red2, {
+    await getLastMessage(ctx)
+    await ctx.reply(msg.red2, {
         reply_markup: {
             inline_keyboard: [
-                [{text: "Так", callback_data: "!!!"}], // todo: link to greenGroup
-                [{text: "Ні", callback_data: "red3"}]
+                [{text: "Так", callback_data: "notReadyYet/red2"}], // todo: link to greenGroup
+                [{text: "Ні", callback_data: "red3/red2"}]
             ]
         }
     });
 }
 
 exports.red3 = async (ctx) => {
-    await ctx.editMessageText(allMessages.red2);
-    await ctx.reply(allMessages.red3, {
+    await getLastMessage(ctx)
+    await ctx.reply(msg.red3, {
         parse_mode: "HTML",
         disable_web_page_preview: true,
         reply_markup: {
@@ -37,16 +39,12 @@ exports.red3 = async (ctx) => {
 }
 
 exports.red4 = async (ctx) => {
-    await ctx.editMessageText(allMessages.red3,
-        {
-            parse_mode: "HTML",
-            disable_web_page_preview: true,
-        }
-    )
-    await ctx.reply(allMessages.red4, {
+    await getLastMessage(ctx)
+
+    await ctx.reply(msg.red4, {
         reply_markup: {
             inline_keyboard: [
-                [{text: "Тиць!", callback_data: "!!!"}], // ToDo: green link
+                [{text: "Тиць!", callback_data: "notReadyYet/red4"}], // ToDo: green link
             ]
         }
     });
