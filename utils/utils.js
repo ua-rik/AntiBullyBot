@@ -5,7 +5,7 @@ exports.getLastMessage = async (ctx) => {
     const lastMessage = msg[lastMessageId]
 
     if (lastMessage) {
-        return ctx.editMessageText(lastMessage,
+        return ctx.editMessageText("✔️ " + lastMessage,
         {
             parse_mode: "HTML",
             disable_web_page_preview: true,
