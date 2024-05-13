@@ -141,7 +141,7 @@ exports.yourRole = async (ctx) => {
           reply_markup: {
                inline_keyboard: [
                     [{ text: "Мішень булінгу", callback_data: "notReadyYet/white10" }],
-                    [{ text: "Свідок булінгу", callback_data: "notReadyYet/white10" }],
+                    [{ text: "Свідок булінгу", callback_data: "yellow1/white10" }],
                     [{ text: "Нападник", callback_data: "pink1/white10" }],
                     [{ text: "Дорослий", callback_data: "notReadyYet/white10" }],
 
@@ -149,6 +149,7 @@ exports.yourRole = async (ctx) => {
           }
      });
 }
+
 
 exports.notReadyYet = async (ctx) => {
      await getLastMessage(ctx)

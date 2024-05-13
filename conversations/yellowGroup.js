@@ -78,3 +78,78 @@ exports.yellow6 = async (ctx) => {
         }
     });
 }
+
+
+exports.yellow7 = async (ctx) => {
+    await getLastMessage(ctx)
+    // "Тоді просто подякую тобі за небайдужість"
+    await ctx.reply(msg.yellow7, {
+        reply_markup: {
+            inline_keyboard: [
+                [{text: "Тиць!", callback_data: "yellow8/yellow7"}],
+            ]
+        }
+    });
+}
+
+exports.yellow8 = async (ctx) => {
+    await getLastMessage(ctx)
+    // "Всіх постраждалих від булінгу обʼєднує те, ..."
+    await ctx.reply(msg.yellow8, {
+        reply_markup: {
+            inline_keyboard: [
+                [{text: "Тиць!", callback_data: "yellow9/yellow8"}],
+            ]
+        }
+    });
+}
+
+exports.yellow9 = async (ctx) => {
+    await getLastMessage(ctx)
+    // "Для булінгу потрібні свідки..."
+    await ctx.reply(msg.yellow9, {
+        reply_markup: {
+            inline_keyboard: [
+                [{text: "Так", callback_data: "yellow11/yellow9"}],
+                [{text: "Ні", callback_data: "yellow10/yellow9"}],
+            ]
+        }
+    });
+}
+
+exports.yellow10 = async (ctx) => {
+    await getLastMessage(ctx)
+    // "Ти молодець! Так і роби!"
+    await ctx.reply(msg.yellow10, {
+        reply_markup: {
+            inline_keyboard: [
+                [{text: "Тиць!", callback_data: "yellow12/yellow10"}],
+            ]
+        }
+    });
+}
+
+
+exports.yellow11 = async (ctx) => {
+    await getLastMessage(ctx)
+    // "Можу тебе зрозуміти..."
+    await ctx.reply(msg.yellow11, {
+        reply_markup: {
+            inline_keyboard: [
+                [{text: "Тиць!", callback_data: "yellow12/yellow11"}],
+            ]
+        }
+    });
+}
+
+exports.yellow12 = async (ctx) => {
+    await getLastMessage(ctx)
+    // "Я дуже поважаю тебе..."
+    await ctx.reply(msg.yellow12, {
+        reply_markup: {
+            inline_keyboard: [
+                [{text: "Тиць!", callback_data: "restartBot/yellow12"}],
+            ]
+        }
+    });
+}
