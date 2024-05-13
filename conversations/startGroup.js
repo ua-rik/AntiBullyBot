@@ -143,7 +143,7 @@ exports.yourRole = async (ctx) => {
                     [{ text: "Мішень булінгу", callback_data: "notReadyYet/white10" }],
                     [{ text: "Свідок булінгу", callback_data: "yellow1/white10" }],
                     [{ text: "Нападник", callback_data: "pink1/white10" }],
-                    [{ text: "Дорослий", callback_data: "notReadyYet/white10" }],
+                    [{ text: "Дорослий", callback_data: "blue1/white10" }],
 
                ]
           }

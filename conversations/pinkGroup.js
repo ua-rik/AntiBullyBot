@@ -1,14 +1,24 @@
 const { msg } = require('./allMessages')
 const { getLastMessage } = require('../utils/utils')
+// byeThen
 
 
 exports.pink1 = async (ctx) => {
     await getLastMessage(ctx)
-    // "Дякую за твою відвертість..."
-    await ctx.reply(msg.pink1_1);
-    // пауза
-    await ctx.replyWithChatAction('typing');
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    //  "Дякую за твою відвертість..."
+    await ctx.reply(msg.pink1_1, {
+        reply_markup: {
+            inline_keyboard: [
+                [{text: "Так!", callback_data: "pink1_2/pink1"}],
+                [{text: "Ні", callback_data: "byeThen/pink1"}],
+            ]
+        }
+    });
+}
+
+exports.pink1_2 = async (ctx) => {
+    await getLastMessage(ctx)
+
     // "Люди часто цькують не через те..."
     await ctx.reply(msg.pink1_2, {
         reply_markup: {

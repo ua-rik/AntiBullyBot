@@ -39,6 +39,14 @@ const msgList = {
     yellow10: yellowGroup.yellow10,
     yellow11: yellowGroup.yellow11,
     yellow12: yellowGroup.yellow12,
+    // Blue
+    blue1: blueGroup.blue1,
+    blue2: blueGroup.blue2,
+    blue3: blueGroup.blue3,
+    blue4: blueGroup.blue4,
+    blue5: blueGroup.blue5,
+    //blue6: blueGroup.blue6,
+    //blue7: blueGroup.blue7,
 
 
     //pink
