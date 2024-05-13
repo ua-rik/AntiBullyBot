@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev:pool": "NODE_ENV=dev nodemon bot.js",
     "start:dev:hook": "NODE_ENV=dev nodemon bot_webhook.js",
-    "start:prod": "NODE_ENV=prod nodemon server.js"
+    "start:prod": "NODE_ENV=prod bot_webhook.js"
   },
   "author": "Yaroslav Davydchuk",
   "license": "ISC",
