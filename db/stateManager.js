@@ -1,20 +1,20 @@
 const pool = require('./config');
 
-async function saveUserState(userId, userName, currentState) {
+const saveUserState = async (userId, userName, currentState) => {
+    // Перевірка на наявність параметрів і присвоєння шаблонних значень
+    // userId = userId ? userId : 'defaultUserId';
+    userName = userName ? userName : 'undefined UserName';
+    currentState = currentState ? currentState : 'undefined State';
+
     const sql = `
         INSERT INTO user_states (user_id, user_name, state, created_at)
         VALUES (?, ?, ?, NOW());
     `;
-    try {
-        await pool.query(sql, [userId, userName, currentState]);
-        console.log("DB: State saved");
-    } catch (error) {
-        console.error("DB: Error saving state:", error);
-    }
+    await pool.query(sql, [userId, userName, currentState]);
 }
 
 
 module.exports = { saveUserState,
     // saveUserGender,
-    // getUserGenrer
+    // getUserGender
 };
