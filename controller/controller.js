@@ -47,17 +47,36 @@ const msgList = {
     blue5: blueGroup.blue5,
     //blue6: blueGroup.blue6,
     //blue7: blueGroup.blue7,
-
-
     //pink
     'pink1': pinkGroup.pink1,
     'pink2': pinkGroup.pink2,
     'pink3': pinkGroup.pink3,
     'pink4': pinkGroup.pink4,
     //green
+    green1: greenGroup.green1,
+    green2: greenGroup.green2,
+    green3: greenGroup.green3,
+    green4: greenGroup.green4,
+    green5: greenGroup.green5,
+    green6: greenGroup.green6,
+    green7: greenGroup.green7,
+    green8: greenGroup.green8,
+    green9: greenGroup.green9,
+    green10: greenGroup.green10,
+    green11: greenGroup.green11,
+    green12: greenGroup.green12,
+    green13: greenGroup.green13,
+    green14: greenGroup.green14,
+    green15: greenGroup.green15,
+    green16: greenGroup.green16,
+    green17: greenGroup.green17,
+    green18: greenGroup.green18,
+    green19: greenGroup.green19,
+    green20: greenGroup.green20,
+    green21: greenGroup.green21,
+    green22: greenGroup.green22,
+    green23: greenGroup.green23,
 };
-
-
 
 exports.controller = (callback) =>  (ctx) => {
     console.log('💬 ', callback)
