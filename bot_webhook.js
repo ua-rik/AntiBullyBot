@@ -1,16 +1,14 @@
-const express = require("express");
+const express = require("express"); // wh
 const {Bot, webhookCallback} = require("grammy");
 
 const dotenv = require('dotenv');
-
-console.log(process.env.NODE_ENV)
+console.log(process.env.NODE_ENV);
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
+const bot = new Bot(process.env.BOT_TOKEN);
 const mainController = require('./controller/controller')
 const { stateSavingMiddleware } = require('./controller/botMiddleware')
 
-//bot init
-const bot = new Bot(process.env.BOT_TOKEN);
 
 //express init
 const app = express();
@@ -18,19 +16,15 @@ app.use(express.json());
 app.use(webhookCallback(bot, "express"));
 
 //bot middlewares
-
 bot.use(stateSavingMiddleware());
-
-
-
+// bot routes
 bot.command("test", (ctx) => mainController.controller('testMessage')(ctx));
-
 bot.command("start", (ctx) => mainController.controller('startMessage')(ctx));
 bot.on("message", (ctx) => mainController.controller('defaultMessage')(ctx));
 bot.on("callback_query", (ctx) => {
         mainController.controller(ctx.callbackQuery.data)(ctx)
 });
-
+///////
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
