@@ -6,7 +6,7 @@ exports.defaultMessage = async (ctx) => {
      // todo: видалити попереднє
 
      await ctx.reply(msg.white13)
-     console.log(`Юзер ${ctx.from.id} пише: ${ctx.message}`)
+     console.log(`Юзер ${ctx.from.id} пише: ${ctx.message.text}`)
 
      // todo: продублювати попереднє
 }
@@ -140,7 +140,7 @@ exports.yourRole = async (ctx) => {
      await ctx.reply(msg.white10, {
           reply_markup: {
                inline_keyboard: [
-                    [{ text: "Мішень булінгу", callback_data: "notReadyYet/white10" }],
+                    [{ text: "Мішень булінгу", callback_data: "green1/white10" }],
                     [{ text: "Свідок булінгу", callback_data: "yellow1/white10" }],
                     [{ text: "Нападник", callback_data: "pink1/white10" }],
                     [{ text: "Дорослий", callback_data: "blue1/white10" }],

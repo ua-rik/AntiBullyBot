@@ -18,7 +18,7 @@ exports.red2 = async (ctx) => {
     await ctx.reply(msg.red2, {
         reply_markup: {
             inline_keyboard: [
-                [{text: "Так", callback_data: "notReadyYet/red2"}], // todo: link to greenGroup
+                [{text: "Так", callback_data: "green15/red2"}], // todo: link to greenGroup
                 [{text: "Ні", callback_data: "red3/red2"}]
             ]
         }
@@ -44,7 +44,7 @@ exports.red4 = async (ctx) => {
     await ctx.reply(msg.red4, {
         reply_markup: {
             inline_keyboard: [
-                [{text: "Тиць!", callback_data: "notReadyYet/red4"}], // ToDo: green link
+                [{text: "Тиць!", callback_data: "restartBot/red4"}], // ToDo: green link
             ]
         }
     });

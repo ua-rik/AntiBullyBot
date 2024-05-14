@@ -8,8 +8,8 @@ exports.blue1 = async (ctx) => {
     await ctx.reply(msg.blue1, {
         reply_markup: {
             inline_keyboard: [
-                [{text: "«Просто Ігноруй»", callback_data: "blue2/blue1"}],
-                [{text: "«Маєш дати Здачі!»", callback_data: "blue3/blue1"}],
+                [{text: "«Просто ігноруй»", callback_data: "blue2/blue1"}],
+                [{text: "«Маєш дати здачі!»", callback_data: "blue3/blue1"}],
                 [{text: "«Я поруч. Я допоможу!»", callback_data: "blue4/blue1"}], // ToDo - change
             ] // «»
 

@@ -242,18 +242,18 @@ exports.green18 = async (ctx) => {
 exports.green19 = async (ctx) => {
     await getLastMessage(ctx)
     // "Давай домовимося про таке: ..."
-    await ctx.reply(msg.green19, {
+    await ctx.reply(msg.green19, { // ToDo: gender
         reply_markup: {
             inline_keyboard: [
-                [{text: "Тиць!", callback_data: "green20/green19"}],
-                [{text: "Тиць!", callback_data: "green21/green19"}],
+                [{text: "Так", callback_data: "green20/green19"}],
+                [{text: "Ні", callback_data: "green21/green19"}],
             ]
         }
     });
 }
 
 exports.green20 = async (ctx) => {
-    await getLastMessage(ctx)
+    await getLastMessage(ctx) // ToDo: gender
     // " Добре, чудово! ..."
     await ctx.reply(msg.green20, {
         reply_markup: {
