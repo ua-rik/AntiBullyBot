@@ -1,10 +1,9 @@
 const { saveUserState } = require('../db/stateManager');
+const {msg} = require("../conversations/allMessages");
 
 function stateSavingMiddleware() {
     return async (ctx, next) => {
         try {
-            console.log('📥 CONTEXT:', ctx.callbackQuery?.data || ctx.message?.text);
-
             let data = ctx.callbackQuery?.data || (ctx.message?.text === '/start' ? '/start' : 'txt' || 'ERROR');
             await saveUserState(ctx.from.id, ctx.from.username, data);
             console.log("👌 State saved successfully");
@@ -16,4 +15,15 @@ function stateSavingMiddleware() {
     }
 }
 
-module.exports = { stateSavingMiddleware };
+const logAll = (ctx, next) => {
+    const currentMessage = msg[ctx.callbackQuery?.data.split('/')[0] || '-']
+
+    console.log(
+        '👤:', ctx.from.username,
+        '| 📥:', ctx.callbackQuery?.data || ctx.message?.text,
+        '| 📤:', currentMessage,
+    )
+    next();
+}
+
+module.exports = { stateSavingMiddleware, logAll };
