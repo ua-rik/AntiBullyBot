@@ -49,6 +49,7 @@ const msgList = {
     //blue7: blueGroup.blue7,
     //pink
     'pink1': pinkGroup.pink1,
+    'pink1_2': pinkGroup.pink1,
     'pink2': pinkGroup.pink2,
     'pink3': pinkGroup.pink3,
     'pink4': pinkGroup.pink4,
