@@ -13,6 +13,12 @@ const saveUserState = async (userId, userName, currentState) => {
     await pool.query(sql, [userId, userName, currentState]);
 }
 
+const saveUserGender = async (userId, as) => {
+    const sql = `
+        INSERT INTO user_genders (user_id, created_at)
+        VALUES (?, NOW());
+    `;
+}
 
 module.exports = { saveUserState,
     // saveUserGender,
