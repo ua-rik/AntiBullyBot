@@ -2,7 +2,7 @@
   "name": "antibullybot",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "bot_webhook.js",
   "scripts": {
     "start:dev:pool": "NODE_ENV=dev nodemon bot.js",
     "start:dev:hook": "NODE_ENV=dev nodemon bot_webhook.js",
