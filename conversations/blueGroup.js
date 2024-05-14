@@ -74,14 +74,14 @@ exports.blue5 = async (ctx) => {
     await ctx.reply('Курс "Школа без цькувань. Батькам"  (1 година)', {
         reply_markup: {
             inline_keyboard: [
-                [{text: "До курсу >> ", url: "https://osvita.diia.gov.ua/courses/skola-bez-ckuvan-castina-2-batkam "}],
+                [{text: "До курсу >> ", url: "https://osvita.diia.gov.ua/courses/skola-bez-ckuvan-castina-2-batkam"}],
             ]
         }
     });
     await ctx.reply('Курс "Школа без цькувань. Вчителям"  (2 години)', {
         reply_markup: {
             inline_keyboard: [
-                [{text: "До курсу >> ", url: "https://osvita.diia.gov.ua/courses/skola-bez-ckuvan-castina-2-batkam "}],
+                [{text: "До курсу >> ", url: "https://osvita.diia.gov.ua/courses/skola-bez-ckuvan-castina-1-ucitelu"}],
             ]
         }
     });
