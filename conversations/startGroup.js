@@ -1,4 +1,5 @@
 //const {InlineKeyboard} = require("grammy");
+const { saveUserGender } = require('../db/stateManager');
 const { msg } = require('./allMessages')
 const { getLastMessage } = require('../utils/utils')
 
@@ -29,13 +30,19 @@ exports.startMessage = async (ctx) => {
 exports.gender = async (ctx, sex) => {
      await getLastMessage(ctx)
      // ToDo: запис в БД статі юзера
+     try {
+          await saveUserGender(ctx.from.id, sex)
+     } catch (err) {
+          console.log('\x1b[31m%s\x1b[0m', '🦠 Error:', err);
+     }
+
      // "Тепер розберімося з твоїм запитом"
      await ctx.reply(msg.white3);
 
      // пауза
      await ctx.replyWithChatAction('typing');
-     await new Promise(resolve => setTimeout(resolve, 2000));
-     // "Тебе щось хвилює"
+     await new Promise(resolve => setTimeout(resolve, 1000));
+     // "Тебе щось хвилює?"
      await ctx.reply(msg.white4, {
           reply_markup: {
                inline_keyboard: [
