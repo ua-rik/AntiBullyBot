@@ -7,20 +7,23 @@ const saveUserState = async (userId, userName, currentState) => {
     currentState = currentState ? currentState : 'undefined State';
 
     const sql = `
-        INSERT INTO user_states (user_id, user_name, state, created_at)
-        VALUES (?, ?, ?, NOW());
+        INSERT INTO user_states (user_id, user_name, state)
+        VALUES (?, ?, ?);
     `;
     await pool.query(sql, [userId, userName, currentState]);
 }
 
-const saveUserGender = async (userId, as) => {
+const saveUserGender = async (tg_id, user_gender) => {
     const sql = `
-        INSERT INTO user_genders (user_id, created_at)
-        VALUES (?, NOW());
-    `;
+        INSERT INTO bot_users (tg_id, user_gender)
+        VALUES (?, ?)
+        ON DUPLICATE KEY UPDATE
+        user_gender = VALUES(user_gender);
+        `
+    await pool.query(sql, [tg_id, user_gender]);
 }
 
 module.exports = { saveUserState,
-    // saveUserGender,
+                saveUserGender,
     // getUserGender
 };
