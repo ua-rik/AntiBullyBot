@@ -16,12 +16,12 @@ function stateSavingMiddleware() {
 }
 
 const logAll = (ctx, next) => {
-    const currentMessage = msg[ctx.callbackQuery?.data.split('/')[0] || '-']
+    const currentMessage = msg[ctx.callbackQuery?.data.split('/')[0]]
 
     console.log(
         '👤:', ctx.from.username,
         '| 📥:', ctx.callbackQuery?.data || ctx.message?.text,
-        '| 📤:', currentMessage,
+        '| 📤:', currentMessage ? currentMessage.slice(0, 50) + "..." : 'undefined'
     )
     next();
 }
