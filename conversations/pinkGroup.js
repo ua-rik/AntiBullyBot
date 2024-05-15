@@ -6,24 +6,23 @@ const { getLastMessage } = require('../utils/utils')
 exports.pink1 = async (ctx) => {
     await getLastMessage(ctx)
     //  "Дякую за твою відвертість..."
-    await ctx.reply(msg.pink1_1, {
+    await ctx.reply(msg.pink1, {
         reply_markup: {
             inline_keyboard: [
-                [{text: "Так!", callback_data: "pink1_2/pink1"}],
+                [{text: "Так!", callback_data: "pink1b/pink1"}],
                 [{text: "Ні", callback_data: "byeThen/pink1"}],
             ]
         }
     });
 }
 
-exports.pink1_2 = async (ctx) => {
+exports.pink1b = async (ctx) => {
     await getLastMessage(ctx)
-
     // "Люди часто цькують не через те..."
-    await ctx.reply(msg.pink1_2, {
+    await ctx.reply(msg.pink1b, {
         reply_markup: {
             inline_keyboard: [
-                [{text: "Тиць!", callback_data: "pink2/pink1_2"}]
+                [{text: "Тиць!", callback_data: "pink2/pink1b"}]
             ]
         }
     });
