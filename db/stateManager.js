@@ -21,9 +21,33 @@ const saveUserGender = async (tg_id, user_gender) => {
         user_gender = VALUES(user_gender);
         `
     await pool.query(sql, [tg_id, user_gender]);
+    console.log("Add gender", user_gender, 'to user', tg_id)
 }
+
+const getUserGender = async (uid) => {
+    const sql = `
+        SELECT user_gender
+        FROM bot_users
+        WHERE tg_id = ?
+    `;
+
+    try {
+        const [rows] = await pool.query(sql, [uid]);
+        if (rows.length > 0) {
+            console.log(rows[0].user_gender)
+            return rows[0].user_gender;
+        } else {
+            console.log('Не знайшов стать юзера')
+            return null;  // Повертаємо null, якщо користувача не знайдено
+        }
+    } catch (error) {
+        console.error('Error fetching user gender:', error.message);
+        //throw error;
+    }
+}
+
 
 module.exports = { saveUserState,
                 saveUserGender,
-    // getUserGender
+                getUserGender
 };
