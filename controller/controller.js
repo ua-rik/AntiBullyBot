@@ -5,6 +5,8 @@ const yellowGroup = require('../conversations/yellowGroup');
 const blueGroup = require('../conversations/blueGroup');
 const greenGroup = require('../conversations/greenGroup');
 
+const logError = require("../utils/logError");
+
 const msgList = {
     //white-start-group
     'testMessage': startGroup.testMessage, // for tests
@@ -93,9 +95,14 @@ exports.controller = (callback) =>  (ctx) => {
 
     if (msgList[action]) {
         msgList[action](ctx);
+
     } else {
-        //ctx.reply("Не відома опція.");
-        console.log('🦠 error');
-        ctx.reply("🦠 Помилка");
+        try {
+            // Симуляція помилки
+            throw new Error('🦠 controller error: missing block');
+        } catch (error) {
+            logError(error);
+        }
+        ctx.reply("🦠 Сталась помилка. Команда розробників вже в курсі - працюємо над цим");
     }
 }

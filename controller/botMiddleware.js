@@ -1,5 +1,6 @@
 const { saveUserState } = require('../db/stateManager');
 const {msg} = require("../conversations/allMessages");
+const logError = require("../utils/logError");
 
 function stateSavingMiddleware() {
     return async (ctx, next) => {
@@ -8,8 +9,7 @@ function stateSavingMiddleware() {
             await saveUserState(ctx.from.id, ctx.from.username, data);
             console.log("👌 State saved successfully");
         } catch (err) {
-            console.error("🧨 Error saving state:", err.message);
-            // ToDo: save error to log
+            logError(err, "📤 saving user state");
         }
         next();
     }
@@ -17,7 +17,6 @@ function stateSavingMiddleware() {
 
 const logAll = (ctx, next) => {
     const currentMessage = msg[ctx.callbackQuery?.data.split('/')[0]]
-
     console.log(
         '👤:', ctx.from.username,
         '| 📥:', ctx.callbackQuery?.data || ctx.message?.text,

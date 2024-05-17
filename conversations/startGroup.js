@@ -1,7 +1,8 @@
-//const {InlineKeyboard} = require("grammy");
+const {InlineKeyboard} = require("grammy");
 const {saveUserGender, getUserGender} = require('../db/stateManager');
 const {msg} = require('./allMessages')
 const {getLastMessage, genT} = require('../utils/utils')
+const logError = require("../utils/logError");
 
 exports.defaultMessage = async (ctx) => {
     await ctx.reply(msg.white13)
@@ -44,7 +45,7 @@ exports.gender = async (ctx, sex) => {
     try {
         await saveUserGender(ctx.from.id, sex)
     } catch (err) {
-        console.log('\x1b[31m%s\x1b[0m', '🦠 Error:', err.message);
+        logError(err, '📤 saving user gender')
     }
 
     // "Тепер розберімося з твоїм запитом"
@@ -183,18 +184,25 @@ exports.notReadyYet = async (ctx) => {
     });
 }
 
-/// test
-// exports.testMessage = async (ctx) => {
-//      //await ctx.deleteMessage()
-//
-//      const keyboard = new InlineKeyboard()
-//          .url("Подзвонити?", "tg://resolve?phone=116111");
-//      await ctx.reply(
-//          `Зателефонуй за номером [911](tel:911) та [\\+380972878635](tel:\\+380972878635)`,
-//          {
-//               parse_mode: "MarkdownV2",
-//               reply_markup: keyboard,
-//               disable_web_page_preview: true
-//          }
-//         );
-// }
+// test
+exports.testMessage = async (ctx) => {
+     //await ctx.deleteMessage()
+    try {
+        throw new Error('mock error')
+    } catch (err) {
+        logError(err, "👾 мок-помилка")
+    }
+
+     const keyboard = new InlineKeyboard()
+         //.url("Подзвонити?", "tg://resolve?phone=116111");
+         .text("Restart", "startMessage")
+         .text("Error", "testMessage")
+     await ctx.reply(
+         'генерую помилку',
+         {
+              parse_mode: "MarkdownV2",
+              reply_markup: keyboard,
+              disable_web_page_preview: true
+         }
+        );
+}

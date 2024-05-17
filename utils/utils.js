@@ -1,5 +1,6 @@
 const { msg } = require('../conversations/allMessages')
 const { getUserGender } = require('../db/stateManager');
+const logError = require("../utils/logError");
 
 const getLastMessage = async (ctx) => {
     const lastMessageId = ctx.callbackQuery?.data.split('/')[1] || null
@@ -15,7 +16,7 @@ const getLastMessage = async (ctx) => {
                 });
         }
     } catch (e) {
-        console.log("📣 ERRROOOORRRR 🧨🧨🧨 :", e);
+        logError(e, "📣 editing last message")
         return null;
     }
 };

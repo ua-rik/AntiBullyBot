@@ -1,4 +1,5 @@
 const pool = require('./config');
+const logError = require("../utils/logError");
 
 const saveUserState = async (userId, userName, currentState) => {
     // Перевірка на наявність параметрів і присвоєння шаблонних значень
@@ -21,7 +22,6 @@ const saveUserGender = async (tg_id, user_gender) => {
         user_gender = VALUES(user_gender);
         `
     await pool.query(sql, [tg_id, user_gender]);
-    console.log("Add gender", user_gender, 'to user', tg_id)
 }
 
 const getUserGender = async (uid) => {
@@ -40,9 +40,8 @@ const getUserGender = async (uid) => {
             console.log('Не знайшов стать юзера')
             return null;  // Повертаємо null, якщо користувача не знайдено
         }
-    } catch (error) {
-        console.error('Error fetching user gender:', error.message);
-        //throw error;
+    } catch (err) {
+        logError(err, "📥 fetching user gender")
     }
 }
 
