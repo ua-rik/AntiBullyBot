@@ -1,12 +1,12 @@
 const { msg } = require('./allMessages')
-const { getLastMessage } = require('../utils/utils')
+const { getLastMessage, genT} = require('../utils/utils')
 // byeThen
 
 
 exports.pink1 = async (ctx) => {
     await getLastMessage(ctx)
     //  "Дякую за твою відвертість..."
-    await ctx.reply(msg.pink1, {
+    await ctx.reply(await genT(msg.pink1, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Так!", callback_data: "pink1b/pink1"}],
@@ -19,7 +19,7 @@ exports.pink1 = async (ctx) => {
 exports.pink1b = async (ctx) => {
     await getLastMessage(ctx)
     // "Люди часто цькують не через те..."
-    await ctx.reply(msg.pink1b, {
+    await ctx.reply(await genT(msg.pink1b, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Тиць!", callback_data: "pink2/pink1b"}]
@@ -31,7 +31,7 @@ exports.pink1b = async (ctx) => {
 exports.pink2 = async (ctx) => {
     await getLastMessage(ctx)
     // "Скажу трохи банальну річ...тобі не здається?"
-    await ctx.reply(msg.pink2, {
+    await ctx.reply(await genT(msg.pink2, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Здається!", callback_data: "pink3/pink2"}]
@@ -43,7 +43,8 @@ exports.pink2 = async (ctx) => {
 exports.pink3 = async (ctx) => {
     await getLastMessage(ctx)
     // 'Булінг - дуже шкідлива штука для ментального здоровʼя.'
-    await ctx.reply(msg.pink3, // ToDo: стать
+    //let txt = await genT(msg.pink3, ctx)
+    await ctx.reply(await genT(msg.pink3, ctx),
         {
             reply_markup: {
                 inline_keyboard: [
@@ -56,7 +57,7 @@ exports.pink3 = async (ctx) => {
 exports.pink4 = async (ctx) => {
     await getLastMessage(ctx)
     // 'Тому наш план дій такий...'
-    await ctx.reply(msg.pink4,
+    await ctx.reply(await genT(msg.pink4, ctx),
         {
             reply_markup: {
                 inline_keyboard: [

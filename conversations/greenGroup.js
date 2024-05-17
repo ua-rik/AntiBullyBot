@@ -1,10 +1,10 @@
 const { msg } = require('./allMessages')
-const { getLastMessage } = require('../utils/utils')
+const { getLastMessage,genT } = require('../utils/utils')
 
 exports.green1 = async (ctx) => {
     await getLastMessage(ctx)
     // "Це було понад один раз? "
-    await ctx.reply(msg.green1, {
+    await ctx.reply(await genT(msg.green1, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Так", callback_data: "green2/green1"}],
@@ -17,7 +17,7 @@ exports.green1 = async (ctx) => {
 exports.green2 = async (ctx) => {
     await getLastMessage(ctx)
     // "Тобі було боляче фізично чи на душі, страшно, неприємно? "
-    await ctx.reply(msg.green2, {
+    await ctx.reply(await genT(msg.green2, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Так", callback_data: "green3/green2"}],
@@ -30,11 +30,13 @@ exports.green2 = async (ctx) => {
 exports.green3 = async (ctx) => {
     await getLastMessage(ctx)
     // "Чи тобі б вдалося припинити ці нападки, якби захотілося?"
-    await ctx.reply(msg.green3, {
+    await ctx.reply(await genT(msg.green3, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Так", callback_data: "green4/green3"}],
                 [{text: "Ні", callback_data: "green5/green3"}],
+                [{text: "Не знаю", callback_data: "green5/green3"}],
+
             ]
         }
     });
@@ -43,7 +45,7 @@ exports.green3 = async (ctx) => {
 exports.green4 = async (ctx) => {
     await getLastMessage(ctx)
     // "Якщо ситуація трапилася з тобою один раз або..."
-    await ctx.reply(msg.green4, {
+    await ctx.reply(await genT(msg.green4, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Так", callback_data: "whatsUp/green4"}],
@@ -57,7 +59,7 @@ exports.green4 = async (ctx) => {
 exports.green5 = async (ctx) => {
     await getLastMessage(ctx)
     // "Тобто щось стоїть на заваді, ..."
-    await ctx.reply(msg.green5, {
+    await ctx.reply(await genT(msg.green5, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Так", callback_data: "green7/green5"}],
@@ -70,7 +72,7 @@ exports.green5 = async (ctx) => {
 exports.green6 = async (ctx) => {
     await getLastMessage(ctx)
     // "Чудово, я радію, що ти можеш себе захистити 🩷 ..."
-    await ctx.reply(msg.green6, {
+    await ctx.reply(await genT(msg.green6, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Так", callback_data: "green12/green6"}],
@@ -83,7 +85,7 @@ exports.green6 = async (ctx) => {
 exports.green7 = async (ctx) => {
     await getLastMessage(ctx)
     // "Чи повідомляв/-ла ти про ситуацію комусь з дорослих?"
-    await ctx.reply(msg.green7, { // ToDo: add gender
+    await ctx.reply(await genT(msg.green7, ctx), { // ToDo: add gender
         reply_markup: {
             inline_keyboard: [
                 [{text: "Так", callback_data: "green8/green7"}],
@@ -94,12 +96,12 @@ exports.green7 = async (ctx) => {
 }
 
 exports.green8 = async (ctx) => {
-    await getLastMessage(ctx) //  ToDo: add gender
+    await getLastMessage(ctx)
     // "Це чудово! Сподіваюся, тобі допомогли?"
-    await ctx.reply(msg.green8, {
+    await ctx.reply(await genT(msg.green8, ctx), {
         reply_markup: {
             inline_keyboard: [
-                [{text: "Так", callback_data: "green15/green8"}], // ToDo: check logic
+                [{text: "Так", callback_data: "green15/green8"}],
                 [{text: "Ні", callback_data: "green10/green8"}],
             ]
         }
@@ -109,7 +111,7 @@ exports.green8 = async (ctx) => {
 exports.green9 = async (ctx) => {
     await getLastMessage(ctx)
     // "Дивися: у 46% після втручання дорослих ситуація... "
-    await ctx.reply(msg.green9, {
+    await ctx.reply(await genT(msg.green9, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Так", callback_data: "green12/green9"}],
@@ -122,7 +124,7 @@ exports.green9 = async (ctx) => {
 exports.green10 = async (ctx) => {
     await getLastMessage(ctx)
     // "От халепа! 😔 ..."
-    await ctx.reply(msg.green10, {
+    await ctx.reply(await genT(msg.green10, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Так", callback_data: "green11/green10"}],
@@ -134,7 +136,7 @@ exports.green10 = async (ctx) => {
 exports.green11 = async (ctx) => {
     await getLastMessage(ctx)
     // "Те, з чим ти стикаєшся, дуже жахливо і ..."
-    await ctx.reply(msg.green11, {
+    await ctx.reply(await genT(msg.green11, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Так", callback_data: "green12/green11"}],
@@ -148,7 +150,7 @@ exports.green11 = async (ctx) => {
 exports.green12 = async (ctx) => {
     await getLastMessage(ctx)
     // "Чудово! Ти знаєш, що ти молодець? 🤩"
-    await ctx.reply(msg.green12, {
+    await ctx.reply(await genT(msg.green12, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Так", callback_data: "green15/green12"}],
@@ -161,7 +163,7 @@ exports.green12 = async (ctx) => {
 exports.green13 = async (ctx) => {
     await getLastMessage(ctx)
     // "Прикро це чути :(\ Але ти ж знаєш, що ти молодець?"
-    await ctx.reply(msg.green13, {
+    await ctx.reply(await genT(msg.green13, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Так", callback_data: "green15/green13"}],
@@ -174,7 +176,7 @@ exports.green13 = async (ctx) => {
 exports.green14 = async (ctx) => {
     await getLastMessage(ctx)
     // "Я дуже раджу тобі підписатися на Телеграм-канал..."
-    await ctx.reply(msg.green14, {
+    await ctx.reply(await genT(msg.green14, ctx), {
         parse_mode: "HTML",
         disable_web_page_preview: true,
         reply_markup: {
@@ -189,7 +191,7 @@ exports.green14 = async (ctx) => {
 exports.green15 = async (ctx) => {
     await getLastMessage(ctx)
     // "Прекрасно! Булінг в школі — це дуже..."
-    await ctx.reply(msg.green15, {
+    await ctx.reply(await genT(msg.green15, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Дати здачі", callback_data: "green16/green15"}],
@@ -206,7 +208,7 @@ exports.green15 = async (ctx) => {
 exports.green16 = async (ctx) => {
     await getLastMessage(ctx)
     // "Це погана ідея, бо, за статистикою, саме того, хто бʼється ..."
-    await ctx.reply(msg.green16, {
+    await ctx.reply(await genT(msg.green16, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Тиць!", callback_data: "green19/green16"}],
@@ -218,7 +220,7 @@ exports.green16 = async (ctx) => {
 exports.green17 = async (ctx) => {
     await getLastMessage(ctx)
     // "Дослідження показують, що мішенями булінгу найчастіше стають ..."
-    await ctx.reply(msg.green17, {
+    await ctx.reply(await genT(msg.green17, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Тиць!", callback_data: "green19/green17"}],
@@ -230,10 +232,11 @@ exports.green17 = async (ctx) => {
 exports.green18 = async (ctx) => {
     await getLastMessage(ctx)
     // "Якщо просто терпіти, то у тебе всередині зростатиме ..."
-    await ctx.reply(msg.green18, {
+    await ctx.reply(await genT(msg.green18, ctx), {
         reply_markup: {
             inline_keyboard: [
-                [{text: "Тиць!", callback_data: "green19/green18"}],
+                [{text: "Так", callback_data: "green19/green18"}],
+                [{text: "Ні", callback_data: "green24/green18"}]
             ]
         }
     });
@@ -242,7 +245,7 @@ exports.green18 = async (ctx) => {
 exports.green19 = async (ctx) => {
     await getLastMessage(ctx)
     // "Давай домовимося про таке: ..."
-    await ctx.reply(msg.green19, { // ToDo: gender
+    await ctx.reply(await genT(msg.green19, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Так", callback_data: "green20/green19"}],
@@ -253,9 +256,9 @@ exports.green19 = async (ctx) => {
 }
 
 exports.green20 = async (ctx) => {
-    await getLastMessage(ctx) // ToDo: gender
+    await getLastMessage(ctx)
     // " Добре, чудово! ..."
-    await ctx.reply(msg.green20, {
+    await ctx.reply(await genT(msg.green20, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Тиць!", callback_data: "green22/green20"}],
@@ -267,7 +270,7 @@ exports.green20 = async (ctx) => {
 exports.green21 = async (ctx) => {
     await getLastMessage(ctx)
     // " Мені дуже прикро, що ти обираєш цю відповідь ..."
-    await ctx.reply(msg.green21, {
+    await ctx.reply(await genT(msg.green21, ctx), {
         parse_mode: "HTML",
         disable_web_page_preview: true,
         reply_markup: {
@@ -281,7 +284,7 @@ exports.green21 = async (ctx) => {
 exports.green22 = async (ctx) => {
     await getLastMessage(ctx)
     // " Коли тобі роблять боляче, ..."
-    await ctx.reply(msg.green22, {
+    await ctx.reply(await genT(msg.green22, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Тиць!", callback_data: "green23/green22"}],
@@ -292,11 +295,35 @@ exports.green22 = async (ctx) => {
 
 exports.green23 = async (ctx) => {
     await getLastMessage(ctx)
-    // " Коли тобі роблять боляче, ..."
-    await ctx.reply(msg.green23, {
+    // " ти найцінніше, ..."
+    await ctx.reply(await genT(msg.green23, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Тиць!", callback_data: "restartBot/green23"}],
+            ]
+        }
+    });
+}
+
+exports.green24 = async (ctx) => {
+    await getLastMessage(ctx)
+    // "Дорослі справді мають більше досвіду"
+    await ctx.reply(await genT(msg.green24, ctx), {
+        reply_markup: {
+            inline_keyboard: [
+                [{text: "Тиць!", callback_data: "green25/green24"}],
+            ]
+        }
+    });
+}
+
+exports.green25 = async (ctx) => {
+    await getLastMessage(ctx)
+    // " Я не можу змусити тебе звернутися по допомогу ..."
+    await ctx.reply(await genT(msg.green25, ctx), {
+        reply_markup: {
+            inline_keyboard: [
+                [{text: "Тиць!", callback_data: "green23/green25"}],
             ]
         }
     });

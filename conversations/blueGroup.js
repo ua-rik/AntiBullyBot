@@ -1,11 +1,11 @@
 const { msg } = require('./allMessages')
-const { getLastMessage } = require('../utils/utils')
+const { getLastMessage, genT } = require('../utils/utils')
 
 
 exports.blue1 = async (ctx) => {
     await getLastMessage(ctx)
     // "Як гадаєте? ... "
-    await ctx.reply(msg.blue1, {
+    await ctx.reply(await genT(msg.blue1, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "«Просто ігноруй»", callback_data: "blue2/blue1"}],
@@ -21,7 +21,7 @@ exports.blue1 = async (ctx) => {
 exports.blue2 = async (ctx) => {
     await getLastMessage(ctx)
     // "«Ти просто ігноруй!» Говорячи так, ви наче кажете дитині ... "
-    await ctx.reply(msg.blue2, {
+    await ctx.reply(await genT(msg.blue2, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Тиць!", callback_data: "blue1/blue2"}],
@@ -33,7 +33,7 @@ exports.blue2 = async (ctx) => {
 exports.blue3 = async (ctx) => {
     await getLastMessage(ctx)
     // "«Ти маєш дати здачі!» ...  "
-    await ctx.reply(msg.blue3, {
+    await ctx.reply(await genT(msg.blue3, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Тиць!", callback_data: "blue1/blue3"}],
@@ -45,7 +45,7 @@ exports.blue3 = async (ctx) => {
 exports.blue4 = async (ctx) => {
     await getLastMessage(ctx)
     // "«Те, що з тобою відбувається — жахливо.» ...  "
-    await ctx.reply(msg.blue4, {
+    await ctx.reply(await genT(msg.blue4, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Тиць!", callback_data: "blue5/blue4"}],
@@ -57,7 +57,7 @@ exports.blue4 = async (ctx) => {
 exports.blue5 = async (ctx) => {
     await getLastMessage(ctx)
     // "Ви маєте право самостійно звернутися до поліції» ...  "
-    await ctx.reply(msg.blue5, {
+    await ctx.reply(await genT(msg.blue5, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Зразок заяви!",  url: "https://drive.google.com/file/d/1JXgYaej8SLv02MjirCUiwXqRHbV-6GXV/view?usp=sharing"}],
@@ -69,7 +69,7 @@ exports.blue5 = async (ctx) => {
     await ctx.replyWithChatAction('typing');
     await new Promise(resolve => setTimeout(resolve, 3000));
     // "Краще зорієнтуватися, що робити дорослому..."
-    await ctx.reply(msg.blue6);
+    await ctx.reply(await genT(msg.blue6, ctx));
     //
     await ctx.reply('Курс "Школа без цькувань. Батькам"  (1 година)', {
         reply_markup: {
@@ -90,7 +90,7 @@ exports.blue5 = async (ctx) => {
     await new Promise(resolve => setTimeout(resolve, 3000));
     //
 
-    await ctx.reply(msg.blue7, {
+    await ctx.reply(await genT(msg.blue7, ctx), {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Тиць!", callback_data: "startMessage/blue7"}],
