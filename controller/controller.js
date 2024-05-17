@@ -12,6 +12,7 @@ const msgList = {
     'defaultMessage': startGroup.defaultMessage,
     'gender_male': (ctx) => startGroup.gender(ctx, 'male'),
     'gender_female': (ctx) => startGroup.gender(ctx, 'female'),
+    'no_gender': (ctx) => startGroup.gender(ctx, 'non_selected'),
     'thanksTakeCare': startGroup.thanksTakeCare,
     'whatsUp': startGroup.whatsUp,
     'restartBot': startGroup.restartBot,
@@ -22,10 +23,14 @@ const msgList = {
     'yourRole': startGroup.yourRole,
     'wannaTalk1': startGroup.wannaTalk,
     //red
-    'red1': redGroup.red1,
-    'red2': redGroup.red2,
-    'red3': redGroup.red3,
-    'red4': redGroup.red4,
+    red1: redGroup.red1,
+    red2: redGroup.red2,
+    red3: redGroup.red3,
+    red4: redGroup.red4,
+    red5: redGroup.red5,
+    red6: redGroup.red6,
+    red7: redGroup.red7,
+
     //yellow
     yellow1: yellowGroup.yellow1,
     yellow2: yellowGroup.yellow2,
@@ -77,6 +82,8 @@ const msgList = {
     green21: greenGroup.green21,
     green22: greenGroup.green22,
     green23: greenGroup.green23,
+    green24: greenGroup.green24,
+    green25: greenGroup.green25,
 };
 
 exports.controller = (callback) =>  (ctx) => {
