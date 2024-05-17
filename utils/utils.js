@@ -42,4 +42,20 @@ function replaceGenderSpecificText(text, gender) {
     });
 }
 
-module.exports = { getLastMessage, genT };
+function formatTimestamp(timestamp) {
+    const date = new Date(timestamp);
+
+    const year = date.getFullYear().toString().slice(-2); // Останні два символи року
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Місяць з лідируючим нулем
+    const day = String(date.getDate()).padStart(2, '0'); // День з лідируючим нулем
+
+    const hours = String(date.getHours()).padStart(2, '0'); // Години з лідируючим нулем
+    const minutes = String(date.getMinutes()).padStart(2, '0'); // Хвилини з лідируючим нулем
+    const seconds = String(date.getSeconds()).padStart(2, '0'); // Секунди з лідируючим нулем
+
+    return `${year}-${month}-${day}(${hours}:${minutes}:${seconds})`;
+}
+
+
+
+module.exports = { getLastMessage, genT, formatTimestamp };

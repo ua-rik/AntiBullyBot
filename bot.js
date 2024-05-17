@@ -1,23 +1,48 @@
-const {Bot} = require("grammy");
+const express = require("express"); // wh
 
-dotenv = require('dotenv');
-console.log(process.env.NODE_ENV);
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` }); //
+const {Bot, webhookCallback} = require("grammy");
 
+const dotenv = require('dotenv');
+console.log("Режим:", process.env.NODE_ENV);
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 const bot = new Bot(process.env.BOT_TOKEN);
-const mainController = require("./controller/controller");
-const { stateSavingMiddleware } = require('./controller/botMiddleware')
+const mainController = require('./controller/controller')
+const { stateSavingMiddleware, logAll } = require('./controller/botMiddleware')
+
+const app = express();
+if (process.env.BOT_MODE === "webhook") {
+    //express init
+    app.use(express.json());
+    app.use(webhookCallback(bot, "express"));
+}
 
 //bot middlewares
 bot.use(stateSavingMiddleware());
-// bot roures
+
+bot.use(logAll); // вимкнути на проді
+
+// bot routes
 bot.command("test", (ctx) => mainController.controller('testMessage')(ctx));
 bot.command("start", (ctx) => mainController.controller('startMessage')(ctx));
 bot.on("message", (ctx) => mainController.controller('defaultMessage')(ctx));
 bot.on("callback_query", (ctx) => {
-    mainController.controller(ctx.callbackQuery.data)(ctx)
+        mainController.controller(ctx.callbackQuery.data)(ctx)
 });
-////////
 
-bot.start();
+///////
+if (process.env.BOT_MODE === "webhook") {
+    //express init
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+        bot.api.setWebhook(`https://${process.env.WEBHOOK_DOMAIN}/secret-path`).then(() => {
+            console.log('Webhook set on ' + `https://${process.env.WEBHOOK_DOMAIN}/secret-path`);
+        });
+    });
+} else {
+    bot.start();
+}
+
+
+

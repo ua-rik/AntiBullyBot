@@ -1,6 +1,7 @@
 const { saveUserState } = require('../db/stateManager');
-const {msg} = require("../conversations/allMessages");
+const { msg } = require("../conversations/allMessages");
 const logError = require("../utils/logError");
+const { formatTimestamp } = require('../utils/utils')
 
 function stateSavingMiddleware() {
     return async (ctx, next) => {
@@ -17,10 +18,13 @@ function stateSavingMiddleware() {
 
 const logAll = (ctx, next) => {
     const currentMessage = msg[ctx.callbackQuery?.data.split('/')[0]]
+    const currentTimestamp = new Date().toISOString();
+    const timeToShow = formatTimestamp(currentTimestamp)
+
     console.log(
-        '👤:', ctx.from.username,
+        '⌚', timeToShow, '👤:', ctx.from.id, '/', ctx.from.username, '\n',
         '| 📥:', ctx.callbackQuery?.data || ctx.message?.text,
-        '| 📤:', currentMessage ? currentMessage.slice(0, 50) + "..." : 'undefined'
+        '| 📤:', currentMessage ? currentMessage.slice(0, 20) + "..." : 'undefined'
     )
     next();
 }
