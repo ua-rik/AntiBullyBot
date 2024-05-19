@@ -34,7 +34,7 @@ const getUserGender = async (uid) => {
     try {
         const [rows] = await pool.query(sql, [uid]);
         if (rows.length > 0) {
-            console.log(rows[0].user_gender)
+            //console.log(rows[0].user_gender)
             return rows[0].user_gender;
         } else {
             console.log('Не знайшов стать юзера')

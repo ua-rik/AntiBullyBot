@@ -89,8 +89,6 @@ const msgList = {
 };
 
 exports.controller = (callback) =>  (ctx) => {
-    console.log('💬 ', callback)
-
     const action = callback.split('/')[0];
 
     if (msgList[action]) {
