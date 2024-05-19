@@ -12,7 +12,12 @@ exports.defaultMessage = async (ctx) => {
 
 exports.startMessage = async (ctx) => {
     await getLastMessage(ctx)
-    const chkGender = getUserGender(ctx.from.id)
+
+    const chkGender = await getUserGender(ctx.from.id).catch((err) => {
+            logError(err, "🔥 get user gender");
+            return null;
+        })
+
     if (chkGender) {
         // "Тебе щось хвилює?"
         await ctx.reply(await genT(msg.white4, ctx), {

@@ -4,7 +4,6 @@ const logError = require("../utils/logError");
 
 const getLastMessage = async (ctx) => {
     const lastMessageId = ctx.callbackQuery?.data.split('/')[1] || null
-
     const lastMessage = msg[lastMessageId]
     const genderReadyLastMessage = await genT(lastMessage, ctx)
     try {
@@ -25,18 +24,19 @@ const getLastMessage = async (ctx) => {
 const genT = async (message, ctx) => {
     // Перевірка наявності гендерних тегів у тексті
     if (/{.*?\|.*?}/.test(message)) {
-        // Отримання статі користувача з бази даних
-        const gender = await getUserGender(ctx.from.id);
-        // Заміна гендерних тегів на відповідні форми
-        return replaceGenderSpecificText(message, gender);
+        return replaceGenderSpecificText(message, ctx);
     } else {
         // Якщо гендерних тегів немає, повертаємо текст без змін
         return message;
         }
 }
 
-// Функція для заміни гендерних тегів у тексті
-function replaceGenderSpecificText(text, gender) {
+// заміна гендерних тегів у тексті
+const replaceGenderSpecificText = async (text, ctx) => {
+    const gender = await getUserGender(ctx.from.id).catch(error => {
+        logError(error, "📣 Error fetching user gender");
+        return 'male';
+    });
     return text.replace(/{(.*?)\|(.*?)}/g, (match, maleForm, femaleForm) => {
         return gender === 'female' ? femaleForm : maleForm;
     });
@@ -45,13 +45,13 @@ function replaceGenderSpecificText(text, gender) {
 function formatTimestamp(timestamp) {
     const date = new Date(timestamp);
 
-    const year = date.getFullYear().toString().slice(-2); // Останні два символи року
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Місяць з лідируючим нулем
-    const day = String(date.getDate()).padStart(2, '0'); // День з лідируючим нулем
+    const year = date.getFullYear().toString().slice(-2);
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
 
-    const hours = String(date.getHours()).padStart(2, '0'); // Години з лідируючим нулем
-    const minutes = String(date.getMinutes()).padStart(2, '0'); // Хвилини з лідируючим нулем
-    const seconds = String(date.getSeconds()).padStart(2, '0'); // Секунди з лідируючим нулем
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
 
     return `${year}-${month}-${day}(${hours}:${minutes}:${seconds})`;
 }
