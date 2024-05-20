@@ -45,13 +45,9 @@ exports.startMessage = async (ctx) => {
     }
 }
 
-exports.gender = async (ctx, sex) => {
+exports.gender = async (ctx, gender) => {
     await getLastMessage(ctx)
-    try {
-        await saveUserGender(ctx.from.id, sex)
-    } catch (err) {
-        logError(err, '📤 saving user gender')
-    }
+    void saveUserGender(ctx.from.id, gender).catch(err => logError(err, '📤 saving user gender'))
 
     // "Тепер розберімося з твоїм запитом"
     await ctx.reply(msg.white3);
