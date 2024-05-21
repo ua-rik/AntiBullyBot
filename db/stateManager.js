@@ -11,7 +11,7 @@ const saveUserState = async (userId, currentState) => {
         INSERT INTO user_states (user_id, state)
         VALUES (?, ?);
     `;
-    await pool.query(sql, [userId, userName, currentState]);
+    await pool.query(sql, [userId, currentState]);
 }
 
 const saveUserGender = async (tg_id, user_gender) => {
