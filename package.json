@@ -5,7 +5,7 @@
   "main": "bot.js",
   "scripts": {
     "start:dev:hook": "NODE_ENV=dev BOT_MODE=webhook nodemon bot.js",
-    "start:dev:pool": "NODE_ENV=dev nodemon bot.js",
+    "start:dev:poll": "NODE_ENV=dev nodemon bot.js",
     "start:prod": "NODE_ENV=prod BOT_MODE=webhook node bot.js",
     "start:prod:spam": "NODE_ENV=prod node bot.js"
   },
