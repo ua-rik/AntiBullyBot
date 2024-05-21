@@ -1,7 +1,5 @@
 const express = require("express"); // wh
-
 const {Bot, webhookCallback} = require("grammy");
-const logError = require("./utils/logError");
 
 const dotenv = require('dotenv');
 console.log("Режим:", process.env.NODE_ENV, '/', process.env.BOT_MODE || 'polling');
