@@ -14,9 +14,9 @@ exports.startMessage = async (ctx) => {
     await getLastMessage(ctx)
 
     const chkGender = await getUserGender(ctx.from.id).catch((err) => {
-            logError(err, "🔥 get user gender");
-            return null;
-        })
+        logError(err, "🔥 get user gender");
+        return null;
+    })
 
     if (chkGender) {
         // "Тебе щось хвилює?"
@@ -187,23 +187,23 @@ exports.notReadyYet = async (ctx) => {
 
 // test
 exports.testMessage = async (ctx) => {
-     //await ctx.deleteMessage()
+    //await ctx.deleteMessage()
     try {
         throw new Error('mock error')
     } catch (err) {
         logError(err, "👾 мок-помилка")
     }
 
-     const keyboard = new InlineKeyboard()
-         //.url("Подзвонити?", "tg://resolve?phone=116111");
-         .text("Restart", "startMessage")
-         .text("Error", "testMessage")
-     await ctx.reply(
-         'генерую помилку',
-         {
-              parse_mode: "MarkdownV2",
-              reply_markup: keyboard,
-              disable_web_page_preview: true
-         }
-        );
+    const keyboard = new InlineKeyboard()
+        //.url("Подзвонити?", "tg://resolve?phone=116111");
+        .text("Restart", "startMessage")
+        .text("Error", "testMessage")
+    await ctx.reply(
+        'генерую помилку',
+        {
+            parse_mode: "MarkdownV2",
+            reply_markup: keyboard,
+            disable_web_page_preview: true
+        }
+    );
 }

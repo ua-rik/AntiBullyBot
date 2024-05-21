@@ -88,18 +88,17 @@ const msgList = {
     green25: greenGroup.green25,
 };
 
-exports.controller = (callback) =>  (ctx) => {
+exports.controller =  (callback) => async (ctx) => {
     const action = callback.split('/')[0];
 
     if (msgList[action]) {
-        msgList[action](ctx);
-
+        await msgList[action](ctx).catch(e => logError(e, '🦠  msg function call'));
     } else {
         try {
             // Симуляція помилки
             throw new Error('🦠 controller error: missing block');
-        } catch (error) {
-            logError(error);
+        } catch (e) {
+            logError(e);
         }
         ctx.reply("🦠 Сталась помилка. Команда розробників вже в курсі - працюємо над цим");
     }

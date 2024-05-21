@@ -1,5 +1,5 @@
-const { msg } = require('./allMessages')
-const { getLastMessage, genT } = require('../utils/utils')
+const {msg} = require('./allMessages')
+const {getLastMessage, genT} = require('../utils/utils')
 
 
 exports.blue1 = async (ctx) => {
@@ -60,7 +60,10 @@ exports.blue5 = async (ctx) => {
     await ctx.reply(await genT(msg.blue5, ctx), {
         reply_markup: {
             inline_keyboard: [
-                [{text: "Зразок заяви!",  url: "https://drive.google.com/file/d/1JXgYaej8SLv02MjirCUiwXqRHbV-6GXV/view?usp=sharing"}],
+                [{
+                    text: "Зразок заяви!",
+                    url: "https://drive.google.com/file/d/1JXgYaej8SLv02MjirCUiwXqRHbV-6GXV/view?usp=sharing"
+                }],
             ]
         }
     });

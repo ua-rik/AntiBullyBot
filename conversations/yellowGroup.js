@@ -1,5 +1,5 @@
-const { msg } = require('./allMessages')
-const { getLastMessage, genT } = require('../utils/utils')
+const {msg} = require('./allMessages')
+const {getLastMessage, genT} = require('../utils/utils')
 
 
 exports.yellow1 = async (ctx) => {

@@ -69,6 +69,7 @@ Telegram.
 # web serwer
 PORT=
 WEBHOOK_DOMAIN=
+SECRET_TOKEN=
 # bot
 BOT_TOKEN=
 # db

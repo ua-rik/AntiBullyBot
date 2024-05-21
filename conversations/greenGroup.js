@@ -1,5 +1,5 @@
-const { msg } = require('./allMessages')
-const { getLastMessage,genT } = require('../utils/utils')
+const {msg} = require('./allMessages')
+const {getLastMessage, genT} = require('../utils/utils')
 
 exports.green1 = async (ctx) => {
     await getLastMessage(ctx)
@@ -175,14 +175,11 @@ exports.green13 = async (ctx) => {
 
 exports.green14 = async (ctx) => {
     await getLastMessage(ctx)
-    // "Я дуже раджу тобі підписатися на Телеграм-канал..."
+    // "Ти — твоя найкраща опора. Ти важливий/важлива..."
     await ctx.reply(await genT(msg.green14, ctx), {
-        parse_mode: "HTML",
-        disable_web_page_preview: true,
         reply_markup: {
             inline_keyboard: [
-                [{text: "Так", callback_data: "green15/green14"}],
-                [{text: "Ні", callback_data: "red1/green14"}],
+                [{text: "Тиць!", callback_data: "green15/green14"}],
             ]
         }
     });
@@ -259,6 +256,8 @@ exports.green20 = async (ctx) => {
     await getLastMessage(ctx)
     // " Добре, чудово! ..."
     await ctx.reply(await genT(msg.green20, ctx), {
+        parse_mode: "HTML",
+        disable_web_page_preview: true,
         reply_markup: {
             inline_keyboard: [
                 [{text: "Тиць!", callback_data: "green22/green20"}],

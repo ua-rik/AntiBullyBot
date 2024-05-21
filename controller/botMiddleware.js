@@ -1,12 +1,12 @@
-const { saveUserState } = require('../db/stateManager');
+const {saveUserState} = require('../db/stateManager');
 const logError = require("../utils/logError");
-const { formatTimestamp } = require('../utils/utils')
+const {formatTimestamp} = require('../utils/utils')
 
 function stateSavingMiddleware() {
     return async (ctx, next) => {
 
-        const data = ctx.callbackQuery?.data || (ctx.message?.text === '/start' ? '/start' : 'txt' || 'ERROR');
-        void saveUserState(ctx.from.id, ctx.from.username, data)
+        const state = ctx.callbackQuery?.data || (ctx.message?.text === '/start' ? '/start' : 'txt' || 'ERROR');
+        void saveUserState(ctx.from.id, state)
             .catch(err => {
                 logError(err, "📤 saving user state");
             });
@@ -25,4 +25,4 @@ const logAll = (ctx, next) => {
     next();
 }
 
-module.exports = { stateSavingMiddleware, logAll };
+module.exports = {stateSavingMiddleware, logAll};

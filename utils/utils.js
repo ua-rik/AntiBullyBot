@@ -1,5 +1,5 @@
-const { msg } = require('../conversations/allMessages')
-const { getUserGender } = require('../db/stateManager');
+const {msg} = require('../conversations/allMessages')
+const {getUserGender} = require('../db/stateManager');
 const logError = require("../utils/logError");
 
 const getLastMessage = async (ctx) => {
@@ -28,7 +28,7 @@ const genT = async (message, ctx) => {
     } else {
         // Якщо гендерних тегів немає, повертаємо текст без змін
         return message;
-        }
+    }
 }
 
 // заміна гендерних тегів у тексті
@@ -57,5 +57,4 @@ function formatTimestamp(timestamp) {
 }
 
 
-
-module.exports = { getLastMessage, genT, formatTimestamp };
+module.exports = {getLastMessage, genT, formatTimestamp};
